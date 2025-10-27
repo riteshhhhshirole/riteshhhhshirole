@@ -988,17 +988,52 @@ Total Marks: 120
 
 Slip 4:
 A: Write Python GUI program to create background with changing colors
- 
+from tkinter import Button, Entry, Label, Tk def changecolor():
+n = value.get() gui.configure(background = n)
+gui=Tk()
+gui.title("color change.") gui.configure(background = "gray") gui.geometry("400x300")
+color = Label(gui, text = "color", bg = "gray") value = Entry(gui)
+apply = Button(gui, text = "Apply", fg = "Black", bg = "gray", command=changecolor) color.grid(row=0,column=0)
+value.grid(row=0,column=1)
+apply.grid(row=0,column=2) gui.mainloop()
  
 
 B: Define a class Employee having members id, name, department, salary. Create a subclass called manager with member bonus. Define methods accept and display in both the classes. Create n objects of the manager class and display the details of the manager having the maximum total salary (salary+bonus).
- 
+class Employee:
+def AcceptEmp(self): self.Id=int(input("Enter emp id:")) self.Name=input("Enter emp name:") self.Dept=input("Enter emp Dept:") self.Sal=int(input("Enter emp Salary:"))
+def DisplayEmp(self): print("Emp id:",self.Id)
+print("Emp Name:",self.Name) print("Emp Dept:",self.Dept) print("Emp Salary:",self.Sal)
+class Manager(Employee): def AcceptMgr(self):
+self.bonus=int(input("Enter Manager Bonus"))
+def DisplayMgr(self): self.TotalSal=0
+print("Manger Bonus is:",self.bonus) self.TotalSal=self.Sal+self.bonus print("Total Salary: ", self.TotalSal)
+
+n=int(input("Enter How may Managers:")) lst=[]
+for i in range(0,n): obj=input("Enter Object Name:") lst.append(obj)
+print(lst)
+for j in range(0,n): lst[j]=Manager() lst[j].AcceptEmp() lst[j].AcceptMgr()
+print("\nDisplay Details of Manager",j+1) lst[j].DisplayEmp()
+lst[j].DisplayMgr()
+maxTotalSal= lst[0].TotalSal maxIndex=0
+for j in range(1,n):
+if lst[j].TotalSal > maxTotalSal: maxTotalSal= lst[j].TotalSal maxIndex=j
+print("\nDisplay Details of Manager Having Maximum Salary(Salary+Bonus)") lst[maxIndex].DisplayEmp()
+lst[maxIndex].DisplayMgr()
+
  
  
 
 
 Slip5:
 A: Write a Python script using class, which has two methods get_String and print_String. get_String accept a string from the user and print_String print the string in upper case.
+class IOString():
+def  init (self): self.str1 = ""
+
+def get_String(self): self.str1 = input()
+
+def print_String(self): print(self.str1.upper())
+
+str1 = IOString() str1.get_String() str1.print_String()
 
 
 Output:
@@ -1006,6 +1041,16 @@ Hello i am TYBBA(CA) Student HELLO I AM TYBBA(CA) STUDEN
 
 
 B: Write a python script to generate Fibonacci terms using generator function.
+nterms = int(input("How many terms? ")) n1, n2 = 0, 1
+count = 0
+if nterms <= 0:
+print("Please enter a positive integer") elif nterms == 1:
+print("Fibonacci sequence upto",nterms,":") print(n1)
+else:
+print("Fibonacci sequence:") while count < nterms:
+print(n1)
+nth = n1 + n2 n1 = n2
+n2 = nth count += 1
  
  
 Output:
@@ -1019,6 +1064,14 @@ How many terms? 6 Fibonacci sequence:
 
 Slip 8:
 A: Write a python script to find the repeated items of a tuple
+t=[]
+n= int(input("Enter the number of elements in list:")) for x in range(0,n):
+element=int(input("Enter element" + str(x+1) + ":")) t.append(element)
+lst=[]
+print("Repeated elements in given tuple ") for i in range(0, len(t)):
+if t.count(t[i])>1 : if t[i] not in lst:
+lst.append(t[i])
+print(t[i])
 
 Output:
 Enter the number of elements in list:3 Enter element1:10
@@ -1026,6 +1079,15 @@ Enter element2:20 Enter element3:10
 Repeated elements in given tuple 10
 
 B: Write a Python class which has two methods get_String and print_String. get_String accept a string from the user and print_String print the string in upper case. Further modify the program to reverse a string word by word and print it in lower case.
+class MyClass:
+def Get_String(self): self.MyStr=input("Enter any String: ")
+def Print_String(self): s=self.MyStr
+print("String in Upper Case: " , s.upper()) cnt=len(s)
+i=cnt-1 RevStr="" while(i >= 0):
+RevStr=RevStr + s[i] i=i-1
+print("String in Reverse & Lower case:" , RevStr.lower())
+
+obj=MyClass() obj.Get_String() obj.Print_String()
  
  
  
@@ -1036,11 +1098,20 @@ String in Reverse & Lower case: itirp
 
 Slip 12:
 A: Write a Python GUI program to create a label and change the label font style (font name, bold, size) using tkinter module.
+import tkinter as tk parent = tk.Tk()
+parent.title("-Welcome to Python tkinter Basic exercises-") my_label = tk.Label(parent, text="Hello", font=("Arial Bold", 70)) my_label.grid(column=0, row=0)
+parent.mainloop()
  
 
 
 
 B: Write a python program to count repeated characters in a string. Sample string: 'thequickbrownfoxjumpsoverthelazydog' Expected output: o-4, e-3, u-2, h-2, r-2, t-2
+import collections
+str1=input("Enter the string you want: ") d = collections.defaultdict(int)
+for c in str1: d[c] += 1
+for c in sorted(d, key=d.get, reverse=True): if d[c] > 1:
+print('%s %d' % (c, d[c]))
+
  
 Output:
 Enter the string you want: Hello I Am TYBBA(CA) Student 4
@@ -1053,6 +1124,14 @@ t 2
 
 Slip 15:
 A: Write a Python class named Student with two attributes student_name, marks. Modify the attribute values of the said class and print the original and modified values of the said attributes.
+class Student:
+def Accept(self):
+self.name=input("Enter Student Name:") self.mark=int(input("Enter Student Total Marks:"))
+def Modify(self): self.oldmark=self.mark
+self.mark=int(input("Enter Student New Total Marks:")) print("Student Name:",self.name)
+print("Old Total Mark:",self.oldmark) print("New Total Mark:",self.mark)
+Stud1=Student() Stud1.Accept() Stud1.Modify()
+
  
 Output:
 Enter Student Name:Geeta Enter Student Total Marks:67
@@ -1060,9 +1139,12 @@ Enter Student New Total Marks:78 Student Name: Geeta
 Old Total Mark: 67 New Total Mark: 78
 
 B: Write a python program to accept string and remove the characters which have odd index values of given string using user defined function
+def odd_values_string(str): result = ""
+for i in range(len(str)): if i % 2 == 0:
+result = result + str[i] return result
+print("Enter the string you want: ") str=input()
+print(odd_values_string(str)) 
  
- 
- print(odd_values_string(str))	
 Output:
 Enter the string you want:
 Hello Hlo
@@ -1070,12 +1152,33 @@ Hello Hlo
 
 Slip 18:
 A: Create a list a = [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89] and write a python program that prints out all the elements of the list that are less than 5
+a = [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
+new_list = [] for item in a:
+if item < 5: new_list.append(item)
+print(new_list)
  
 Output:
 [1, 1, 2, 3]
 
  
 B: Write a python script to define the class person having members name, address. Create a subclass called Employee with members staffed salary. Create 'n' objects of the Employee class and display all the details of the employee.
+class Person:
+def GetPerson(self):
+self.Name=input("\n Enter tne name of Person: ") self.Address=input("Enter Address of Person: ")
+def PutPerson(self):
+print("Person Name:",self.Name) print("Student Address:",self.Address)
+
+class Employee(Person): def GetSalary(self):
+self.Sal=int(input("Enter Salary of Employee")) def PutSalary(self):
+print("Salary of Employee:",self.Sal)
+
+n=int(input("Enter How may Employee: ")) lst=[]
+for i in range(0,n): obj=input("Enter Object Name:") lst.append(obj)
+print(lst)
+for j in range(0,n): lst[j]=Employee()
+lst[j].GetPerson() lst[j].GetSalary()
+print("\nDisplay Details of Employee",j+1)
+lst[j].PutPerson() lst[j].PutSalary()
  
 Output:
 Enter How may Employee: 1 Enter Object Name:A
@@ -1089,14 +1192,27 @@ Student Address: Pune Salary of Employee: 1234
 
 Slip 20:
 A: Write a python program to create a class Circle and Compute the Area and the circumferences of the circle.(use parameterized constructor)
- 
+class Circle():
+def  init (self, r): self.radius = r
+def area(self):
+return self.radius**2*3.14 def perimeter(self):
+return 2*self.radius*3.14
+
+NewCircle = Circle(8) print(NewCircle.area()) print(NewCircle.perimeter())
+
+
 
 
 Output:
 200.96
 50.24
 
-B: Write a Python script to generate and print a dictionary which contains a number (between 1 and n) in the form(x,x*x). Sample Dictionary (n=5) Expected Output: {1:1, 2:4, 3:9, 4:16, 5:25}
+B: Write a Python script to generate and print a dictionary which contains a number (between 1 and n) in the form(x,x*x). Sample Dictionary (n=5) Expected 
+n=int(input("Input a number ")) d = dict()
+for x in range(1,n+1): d[x]=x*x
+print(d)
+
+Output: {1:1, 2:4, 3:9, 4:16, 5:25}
  
 Output:
 Input a number 5
@@ -1104,15 +1220,24 @@ Input a number 5
 
 Slip 21:
 A: Define a class named Rectangle which can be constructed by a length and width. The Rectangle class has a method which can compute the area and Perimeter.
+class Rectangle:
+def  init (self, l, w): self.length = l self.width = w
+def rectangle_area(self):
+return self.length*self.width
+
+newRectangle = Rectangle(12, 10) print(newRectangle.rectangle_area())
  
 Output:
 120
 
 B) Write a Python program to convert a tuple of string values to a tuple of integer values. Original tuple values: (('333', '33'), ('1416', '55')) New tuple values: ((333, 33), (1416, 55))
- 
- 
- print(Convert_Fun(tuple_str))	
-Output:
+ class Rectangle:
+def  init (self, l, w): self.length = l self.width = w
+def rectangle_area(self):
+return self.length*self.width
+
+newRectangle = Rectangle(12, 10) print(newRectangle.rectangle_area())
+output:
 Original tuple values:
 (('333', '33'), ('1416', '55'))
 
@@ -1121,8 +1246,20 @@ New tuple values:
 
 
 
+
+
 Slip 25:
 A: Write a Python function that accepts a string and calculate the number of upper case letters and lower case letters. Sample String : 'The quick Brow Fox' Expected Output : No. of Upper case characters : 3 No. of Lower case Characters : 12
+def lowerupper(s): count1=0 count2=0
+for i in s: if(i.islower()):
+count1=count1+1 elif(i.isupper()):
+count2=count2+1
+print("The number of lowercase characters is:")
+print(count1)
+print("The number of uppercase characters is:") print(count2)
+
+str=input("Enter string:") lowerupper(str)
+
  
  
  
@@ -1134,6 +1271,22 @@ The number of uppercase characters is:
 10
 
 B: Write a Python script to Create a Class which Performs Basic Calculator Operations
+class MathOp:
+def AddOp(self): self.a=int(input("Enter first no:")) self.b=int(input("Enter Second no:")) self.c= self.a + self.b
+print("Addition is:",self.c) def SubOp(self):
+self.a=int(input("Enter first no:")) self.b=int(input("Enter Second no:")) self.c= self.a - self.b
+print("Sub is:",self.c) def MulOp(self):
+self.a=int(input("Enter first no:")) self.b=int(input("Enter Second no:")) self.c= self.a * self.b
+print("Addition is:",self.c) print("Multiplication is:",self.c)
+#main body obj=MathOp() while True:
+print("\n1. Addtion") print("2. Substraction") print("3. Multiplication") print("4. Exit")
+ch=int(input("Enter choice to perform any opertaion")) if ch==1:
+obj.AddOp() elif ch==2:
+obj.SubOp() elif ch==3:
+obj.MulOp()
+elif ch==4: print("\nProgram Stop") break
+else:
+print("Wrong Choice")
  
  
 
@@ -1153,6 +1306,11 @@ Enter Second no:20 Addition is: 30
 Enter choice to perform any opertaion4 Program Stop
 Slip 28:
 A: Write a Python GUI program to create a list of Computer Science Courses using Tkinter module (use Listbox).
+from tkinter import * top = Tk() top.title('Course') top.geometry("300x250")
+Lb1 =Listbox(top,fg='yellow',width=30,bg='gray',bd=1,activestyle='dotbox')
+label=Label(top,text='Computer Science Course Listing').pack()
+Lb1.insert(1, "Computer Programming") Lb1.insert(2, "Information Science") Lb1.insert(3, "Networking") Lb1.insert(4, "Operating Systems") Lb1.insert(5, "Artificial Intelligence") Lb1.insert(6, "Information Technology") Lb1.insert(7,'Information Security') Lb1.insert(8, "Cyber Security") Lb1.pack()
+top.mainloop()
  
  
  
@@ -1160,6 +1318,16 @@ A: Write a Python GUI program to create a list of Computer Science Courses using
 Output:-
 
 B: Write a Python program to accept two lists and merge the two lists into list of tuple.
+def merge(list1, list2):
+merged_list = [(list1[i], list2[i]) for i in range(0, len(list1))] return merged_list
+list1 = [] list2 = []
+n = int(input("Enter number of elements of first list : ")) for i in range(0, n):
+ele = int(input()) list1.append(ele)
+print(list1)
+n1 = int(input("Enter number of elements of second list : ")) for i in range(0, n1):
+ele1 = int(input()) list2.append(ele1)
+print(list2)
+print("After the merging of two list") print(merge(list1, list2))
  
 Output:
 Enter number of elements of first list : 3 10
