@@ -330,15 +330,30 @@ A) Write a Vb.Net program to move the Text “Pune University” continuously fr
  
 Answer : 
  
-Public Class Form1 
-    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick 
-        If Label1.Left >= Me.Width Then 
-            Label1.Left = -100 
-        Else 
-            Label1.Left = Label1.Left + 10 
-        End If 
-    End Sub 
-End Class 
+Public Class Form1
+
+    Dim direction As Integer = 1   ' 1 = right, -1 = left
+
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Timer1.Interval = 50
+        Timer1.Start()
+    End Sub
+
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        Label1.Left = Label1.Left + direction
+
+        ' Right boundary
+        If Label1.Right >= Me.Width Then
+            direction = -1
+        End If
+
+        ' Left boundary
+        If Label1.Left <= 0 Then
+            direction = 1
+        End If
+    End Sub
+
+End Class
   
  
 B)Write a C#.Net program to create a base class Department and derived classes Sales and 
